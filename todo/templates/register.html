@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Home{% endblock title %}
+
+
+
+{% block content %}
+
+
+
+
+<form action="{%url 'signup'%}" method="post">
+    {%csrf_token%}
+<div class="form">
+    <input type="text" placeholder="Username" name="username">
+    <input type="password" placeholder="Password" name="password">
+    <input type="email" placeholder="example@gmail.com" name="email">
+    <button type="submit">Sign Up</button>
+</div>
+</form>
+{% endblock content %}
+
+

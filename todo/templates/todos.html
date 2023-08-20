@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+{% block title %}My Todos{% endblock title %}
+
+
+{% block content %}
+
+<div class="list-group">
+    <a href="#" class=" container my-4 list-group-item list-group-item-action" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <span>{{todo.sn}}</span><h5 class="mb-1">My To Do List</h5>
+          <small></small>
+        </div>
+      </a>
+
+
+  <form action="{%url 'add_todo' %}" method="post">
+    {%csrf_token%}
+    <div class="add-todo">
+      <input type="hidden" name="user" value="{{request.user}}">
+      <input type="text" name="todo" placeholder="Enter The work title">
+    <button type="sumbit" class="btn btn-primary">Add ToDO</button>
+    </div>
+  </form>
+
+  
+{% for todo in todos  %}
+
+
+
+    <a href="#" class=" container my-4 list-group-item list-group-item-action active" aria-current="true">
+      <div class="d-flex w-100 justify-content-between">
+        <span>{{todo.sn}}</span><h5 class="mb-1">{{todo.title}}</h5>
+        <span class="badge rounded-pill text-bg-danger ">{{todo.work_status}}</span>
+        
+        {% comment %} Delete the todo  {% endcomment %}
+        
+        <form action="{%url 'remove' %}" method="post">
+          {%csrf_token%}
+            <input type="hidden" value="{{todo.sn}}" name="todoid">
+            <input type="hidden" value="{{request.user}}" name="user">
+            <button type="sumbit" class="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Delete</button>
+          </div>
+          <i class="gg-check"></i> 
+      </a>
+     
+    </form>
+
+
+{% endfor %}
+
+
+{% endblock content %}
+
+
